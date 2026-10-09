@@ -1,0 +1,26 @@
+{
+  "name": "student-crud",
+  "version": "1.0.0",
+  "description": "",
+  "homepage": "https://github.com/mmsonixx/student-crud#readme",
+  "bugs": {
+    "url": "https://github.com/mmsonixx/student-crud/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mmsonixx/student-crud.git"
+  },
+  "license": "ISC",
+  "author": "",
+  "type": "module",
+  "scripts": {
+    "dev": "npx parcel src/index.html",
+    "build": "parcel build src/index.html --public-url /student-crud/",
+    "deploy": "gh-pages -d dist",
+    "predeploy": "npm run build",
+    "server": "npx json-server students.json"
+  },
+  "dependencies": {
+    "gh-pages": "^6.3.0"
+  }
+}
