@@ -207,7 +207,7 @@
       });
     }
   }
-})({"j3LsT":[function(require,module,exports,__globalThis) {
+})({"5j6Kf":[function(require,module,exports,__globalThis) {
 var global = arguments[3];
 var HMR_HOST = null;
 var HMR_PORT = null;
@@ -714,7 +714,135 @@ function hmrAccept(bundle /*: ParcelRequire */ , id /*: string */ ) {
 }
 
 },{}],"a0t4e":[function(require,module,exports,__globalThis) {
+var _renderPage = require("./js/operation/renderPage");
+(0, _renderPage.renderPage)();
 
-},{}]},["j3LsT","a0t4e"], "a0t4e", "parcelRequire468d", {})
+},{"./js/operation/renderPage":"ewFud"}],"ewFud":[function(require,module,exports,__globalThis) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "renderPage", ()=>renderPage);
+var _renderStudents = require("../markup/renderStudents");
+var _studentSearch = require("./studentSearch");
+const renderPage = async ()=>{
+    await (0, _renderStudents.renderStudents)();
+    await (0, _studentSearch.studentSearch)();
+};
+
+},{"../markup/renderStudents":"atCGd","./studentSearch":"kJQvj","@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT"}],"atCGd":[function(require,module,exports,__globalThis) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "renderStudents", ()=>renderStudents);
+var _getStudentsApi = require("../api/getStudentsApi");
+var _makeStudentsList = require("./makeStudentsList");
+const list = document.querySelector(".students__list");
+const renderStudents = async ()=>{
+    const data = await (0, _getStudentsApi.getStudentsApi)();
+    list.innerHTML = (0, _makeStudentsList.makeStudentsList)(data);
+};
+
+},{"../api/getStudentsApi":"iYGIt","./makeStudentsList":"6V9Ex","@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT"}],"iYGIt":[function(require,module,exports,__globalThis) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "getStudentsApi", ()=>getStudentsApi);
+const getStudentsApi = async ()=>{
+    try {
+        return await fetch("http://localhost:3000/students").then((response)=>{
+            return response.json();
+        });
+    } catch (error) {
+        console.log(error.message);
+    }
+};
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT"}],"jnFvT":[function(require,module,exports,__globalThis) {
+exports.interopDefault = function(a) {
+    return a && a.__esModule ? a : {
+        default: a
+    };
+};
+exports.defineInteropFlag = function(a) {
+    Object.defineProperty(a, '__esModule', {
+        value: true
+    });
+};
+exports.exportAll = function(source, dest) {
+    Object.keys(source).forEach(function(key) {
+        if (key === 'default' || key === '__esModule' || Object.prototype.hasOwnProperty.call(dest, key)) return;
+        Object.defineProperty(dest, key, {
+            enumerable: true,
+            get: function() {
+                return source[key];
+            }
+        });
+    });
+    return dest;
+};
+exports.export = function(dest, destName, get) {
+    Object.defineProperty(dest, destName, {
+        enumerable: true,
+        get: get
+    });
+};
+
+},{}],"6V9Ex":[function(require,module,exports,__globalThis) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "makeStudentsList", ()=>makeStudentsList);
+parcelHelpers.export(exports, "makeStudentMarkup", ()=>makeStudentMarkup);
+const makeStudentsList = (students)=>{
+    const studentsHtml = students.map((student)=>` <li class="students__item">
+        <p class="student-id">${student.id}</p>
+        <p class="student-name">${student.name}</p>
+        <p class="student-age">${student.age}</p>
+        <p class="student-email">${student.email}</p>
+        <p class="student-phone">${student.phone}</p>
+    </li>`).join("");
+    return studentsHtml;
+};
+const makeStudentMarkup = (student)=>{
+    const studentHtml = ` <li class="students__item">
+        <p class="student-id">${student.id}</p>
+        <p class="student-name">${student.name}</p>
+        <p class="student-age">${student.age}</p>
+        <p class="student-email">${student.email}</p>
+        <p class="student-phone">${student.phone}</p>
+    </li>`;
+    return studentHtml;
+};
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT"}],"kJQvj":[function(require,module,exports,__globalThis) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "studentSearch", ()=>studentSearch);
+var _getStudentByIdApi = require("../api/getStudentByIdApi");
+var _makeStudentsList = require("../markup/makeStudentsList");
+const form = document.querySelector(".form-id");
+const input = document.querySelector("[data-student-id]");
+const studentFound = document.querySelector(".student__result");
+const studentSearch = ()=>{
+    form.addEventListener("submit", async (event)=>{
+        event.preventDefault();
+        const id = input.value;
+        const data = await (0, _getStudentByIdApi.getStudentByIdApi)(id);
+        studentFound.innerHTML = (0, _makeStudentsList.makeStudentMarkup)(data);
+        form.reset();
+    });
+};
+
+},{"../api/getStudentByIdApi":"kWs6K","../markup/makeStudentsList":"6V9Ex","@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT"}],"kWs6K":[function(require,module,exports,__globalThis) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "getStudentByIdApi", ()=>getStudentByIdApi);
+const getStudentByIdApi = async (id)=>{
+    try {
+        const response = await fetch(`http://localhost:3000/students/${id}`);
+        const student = await response.json();
+        return student;
+    } catch (error) {
+        console.log(error.message);
+    }
+};
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT"}]},["5j6Kf","a0t4e"], "a0t4e", "parcelRequire468d", {})
 
 //# sourceMappingURL=student-crud.31b563d9.js.map
