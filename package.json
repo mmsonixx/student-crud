@@ -18,9 +18,12 @@
     "build": "parcel build src/index.html --public-url /student-crud/",
     "deploy": "gh-pages -d dist",
     "predeploy": "npm run build",
-    "server": "npx json-server students.json"
+    "server": "npx json-server db.json"
   },
   "dependencies": {
     "gh-pages": "^6.3.0"
+  },
+  "devDependencies": {
+    "parcel": "^2.16.4"
   }
 }
